@@ -55,7 +55,10 @@ Customer:
 - name (string)
 - phone (string)
 
+- note (string, optional: any specific instructions or notes)
+
 Pet:
+- name (string)
 - breed (string)
 - weight (string, in kg if possible)
 - age (string, e.g. "6 months", "2 years")
@@ -82,7 +85,9 @@ Return EXACTLY this structure:
   "data": {
     "name": "",
     "phone": "",
+        "note": "",
     "pet": {
+      "name": "",
       "breed": "",
       "weight": "",
       "age": "",
@@ -140,9 +145,12 @@ def update_session(session, data):
     if data.get("phone"):
         session["phone"] = data["phone"]
 
+    if data.get("note"):
+        session["note"] = data["note"]
+
     pet = data.get("pet", {})
 
-    for field in ["breed", "weight", "age", "coat"]:
+    for field in ["name", "breed", "weight", "age", "coat"]:
         if pet.get(field):
             session["pet"][field] = pet[field]
 
@@ -174,6 +182,7 @@ async def on_message(message):
         user_sessions[user_id] = {
             "name": "",
             "phone": "",
+            "note": "",
             "pet": {
                 "breed": "",
                 "weight": "",
@@ -209,7 +218,7 @@ async def on_message(message):
 
         await message.channel.send(
             "I couldn't process that properly. Please provide missing details:\n"
-            "- name\n- phone\n- pet breed\n- pet weight\n- pet age\n- pet coat"
+            "- name\n- phone\n- pet name\n- pet breed\n- pet weight\n- pet age\n- pet coat\n- special notes (optional)"
         )
         return
 

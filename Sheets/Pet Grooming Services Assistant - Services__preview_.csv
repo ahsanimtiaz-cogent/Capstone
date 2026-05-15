@@ -1,0 +1,5 @@
+service_id,title,description,base_price,duration_min,breed_modifier_json,weight_brackets_json,upsells_json
+SVC001,Full Groom,"Bath, brush, haircut, nails, ears.",50,90,"{""Poodle"": 1.15, ""Husky"": 1.2, ""Shih Tzu"": 1.1}","[{""min"": 0, ""max"": 9.9, ""mult"": 1.0}, {""min"": 10, ""max"": 24.9, ""mult"": 1.2}, {""min"": 25, ""max"": 200, ""mult"": 1.4}]","[""UPS001"", ""UPS002"", ""UPS003""]"
+SVC002,Bath & Brush,"Shampoo, blow-dry, brush out.",30,60,"{""Husky"": 1.25, ""German Shepherd"": 1.15}","[{""min"": 0, ""max"": 9.9, ""mult"": 1.0}, {""min"": 10, ""max"": 24.9, ""mult"": 1.15}, {""min"": 25, ""max"": 200, ""mult"": 1.3}]","[""UPS001"", ""UPS003""]"
+SVC003,Nail Trim,Clip and file nails.,10,15,{},"[{""min"": 0, ""max"": 200, ""mult"": 1.0}]",[]
+SVC004,De-shedding (Add-on),Undercoat rake and de-shed treatment.,15,20,"{""Husky"": 1.3, ""German Shepherd"": 1.2}","[{""min"": 0, ""max"": 9.9, ""mult"": 1.0}, {""min"": 10, ""max"": 24.9, ""mult"": 1.1}, {""min"": 25, ""max"": 200, ""mult"": 1.2}]",[]
