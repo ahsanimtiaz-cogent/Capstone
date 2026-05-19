@@ -20,3 +20,12 @@ Thumbs.db
 # IDE files
 .vscode/
 .idea/
+
+# OAuth tokens and credentials — never commit these
+token.pickle
+token.json
+lang-graph/token.pickle
+lang-graph/credentials.json
+credentials.json
+google-key.json
+*.webloc
