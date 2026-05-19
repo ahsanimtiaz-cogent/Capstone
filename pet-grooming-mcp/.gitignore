@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+config/env/.env
+*.sqlite3
+*.log
+token.pickle
+google-key.json
+credentials.json
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+static/
+media/

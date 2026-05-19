@@ -1,0 +1,71 @@
+x-app-env: &app-env
+  # Inside Docker, services resolve by their compose name. These overrides
+  # let the same `config/env/.env` work for both local-host dev (REDIS_URL=
+  # redis://localhost, DB_HOST=blank → sqlite) and Docker dev.
+  REDIS_URL: redis://redis:6379
+  DB_ENGINE: django.db.backends.postgresql
+  DB_NAME: grooming
+  DB_USER: grooming
+  DB_PASSWORD: grooming
+  DB_HOST: db
+  DB_PORT: "5432"
+  MCP_SERVER_URL: http://mcp:8010/mcp
+
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: grooming
+      POSTGRES_PASSWORD: grooming
+      POSTGRES_DB: grooming
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+
+  redis:
+    image: redis:7
+    ports: ["6379:6379"]
+
+  mcp:
+    build: .
+    command: python -m mcp_servers.grooming_mcp_server
+    env_file: [config/env/.env]
+    environment: *app-env
+    ports: ["8010:8010"]
+    depends_on: [db]
+    volumes: [".:/code"]
+
+  app:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file: [config/env/.env]
+    environment: *app-env
+    ports: ["8000:8000"]
+    depends_on: [db, redis, mcp]
+    volumes: [".:/code"]
+
+  celery:
+    build: .
+    command: celery -A project worker -l info
+    env_file: [config/env/.env]
+    environment: *app-env
+    depends_on: [db, redis]
+    volumes: [".:/code"]
+
+  celery-beat:
+    build: .
+    command: celery -A project beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    env_file: [config/env/.env]
+    environment: *app-env
+    depends_on: [db, redis]
+    volumes: [".:/code"]
+
+  discord-bot:
+    build: .
+    command: python -m project.grooming.bot.runner
+    env_file: [config/env/.env]
+    environment: *app-env
+    depends_on: [mcp, redis, db]
+    volumes: [".:/code"]
+
+volumes:
+  pgdata:
