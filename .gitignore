@@ -1,0 +1,31 @@
+# Environment variables
+.env
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# OAuth tokens and credentials — never commit these
+token.pickle
+token.json
+lang-graph/token.pickle
+lang-graph/credentials.json
+credentials.json
+google-key.json
+*.webloc

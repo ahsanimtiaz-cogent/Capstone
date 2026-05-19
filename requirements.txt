@@ -1,0 +1,22 @@
+discord.py==2.4.0
+python-dotenv==1.0.1
+google-generativeai
+google-api-python-client
+google-auth
+google-auth-httplib2
+google-auth-oauthlib
+
+
+
+langgraph==0.2.35
+langchain-core==0.3.15
+langchain-google-genai==2.0.7
+pydantic==2.9.2
+typing-extensions==4.12.2
+
+
+
+gspread==6.1.4
+
+apscheduler>=3.10
+pytest>=8.0  # for eval suite
